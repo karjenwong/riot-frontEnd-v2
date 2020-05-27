@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import axios from "axios";
+import SearchForm from "./Components/SearchForm";
+
+const url =
+  "http://ec2-34-217-208-140.us-west-2.compute.amazonaws.com:8080/riot";
 
 function App() {
+  const [data, setData] = useState([]);
+  const [listOfChamps, setListOfChamps] = useState([]);
+
+  useEffect(() => {
+    axios.post(`${url}/championslist`).then(function (response) {
+      setListOfChamps(response.data);
+    });
+  }, []);
+
+  console.log(data);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div className="form">
+      <SearchForm
+        listOfChamps={listOfChamps}
+        data={data}
+        setData={setData}
+        url={url}
+      />
+      
     </div>
+    <div>Filler</div>
+    </>
   );
 }
 
