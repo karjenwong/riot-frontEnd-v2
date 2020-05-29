@@ -3,3 +3,16 @@
   justify-content: center;
 }
 
+.flex {
+  display:flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+.align-center {
+  align-items: center;
+}
